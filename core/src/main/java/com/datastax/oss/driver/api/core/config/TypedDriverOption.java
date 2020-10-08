@@ -215,6 +215,9 @@ public class TypedDriverOption<ValueT> {
    */
   public static final TypedDriverOption<Boolean> SSL_HOSTNAME_VALIDATION =
       new TypedDriverOption<>(DefaultDriverOption.SSL_HOSTNAME_VALIDATION, GenericType.BOOLEAN);
+  /** The type of the keystore instance. */
+  public static final TypedDriverOption<String> SSL_KEYSTORE_TYPE =
+      new TypedDriverOption<>(DefaultDriverOption.SSL_KEYSTORE_TYPE, GenericType.STRING);
   /** The location of the keystore file. */
   public static final TypedDriverOption<String> SSL_KEYSTORE_PATH =
       new TypedDriverOption<>(DefaultDriverOption.SSL_KEYSTORE_PATH, GenericType.STRING);

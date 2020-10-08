@@ -734,8 +734,15 @@ public abstract class SessionBuilder<SelfT extends SessionBuilder, SessionT> {
           LOG.info(
               "Both a secure connect bundle and SSL options were provided. They are mutually exclusive. The SSL options from the secure bundle will have priority.");
         }
-        CloudConfig cloudConfig =
-            new CloudConfigFactory().createCloudConfig(cloudConfigInputStream.call());
+
+        CloudConfigFactory cloudFactory = new CloudConfigFactory();
+        if (defaultConfig.isDefined(DefaultDriverOption.SSL_KEYSTORE_TYPE)) {
+          LOG.info("Using alternative KeyStore type provided by configuration.");
+          cloudFactory.setKeyStoreType(
+              defaultConfig.getString(DefaultDriverOption.SSL_KEYSTORE_TYPE));
+        }
+
+        CloudConfig cloudConfig = cloudFactory.createCloudConfig(cloudConfigInputStream.call());
         addContactEndPoints(cloudConfig.getEndPoints());
 
         boolean localDataCenterDefined =

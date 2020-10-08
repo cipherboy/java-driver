@@ -56,6 +56,22 @@ import org.slf4j.LoggerFactory;
 @ThreadSafe
 public class CloudConfigFactory {
   private static final Logger LOG = LoggerFactory.getLogger(CloudConfigFactory.class);
+
+  private String keyStoreType = "JKS";
+
+  /** Creates a CloudConfigFactory with default KeyStore type. */
+  public CloudConfigFactory() {}
+
+  /** Creates a CloudConfigFactory with specified KeyStore type. */
+  public CloudConfigFactory(String type) {
+    keyStoreType = "JKS";
+  }
+
+  /** Sets the specified KeyStore type on an existing CloudConfigFactory instance. */
+  public void setKeyStoreType(String type) {
+    keyStoreType = type;
+  }
+
   /**
    * Creates a {@link CloudConfig} with information fetched from the specified Cloud configuration
    * URL.
@@ -199,7 +215,7 @@ public class CloudConfigFactory {
   protected KeyManagerFactory createKeyManagerFactory(
       @NonNull InputStream keyStoreInputStream, @NonNull char[] keyStorePassword)
       throws IOException, GeneralSecurityException {
-    KeyStore ks = KeyStore.getInstance("JKS");
+    KeyStore ks = KeyStore.getInstance(keyStoreType);
     ks.load(keyStoreInputStream, keyStorePassword);
     KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
     kmf.init(ks, keyStorePassword);
@@ -211,7 +227,7 @@ public class CloudConfigFactory {
   protected TrustManagerFactory createTrustManagerFactory(
       @NonNull InputStream trustStoreInputStream, @NonNull char[] trustStorePassword)
       throws IOException, GeneralSecurityException {
-    KeyStore ts = KeyStore.getInstance("JKS");
+    KeyStore ts = KeyStore.getInstance(keyStoreType);
     ts.load(trustStoreInputStream, trustStorePassword);
     TrustManagerFactory tmf =
         TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());

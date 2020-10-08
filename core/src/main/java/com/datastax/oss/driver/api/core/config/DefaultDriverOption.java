@@ -239,6 +239,12 @@ public enum DefaultDriverOption implements DriverOption {
    */
   SSL_HOSTNAME_VALIDATION("advanced.ssl-engine-factory.hostname-validation"),
   /**
+   * The type of the keystore file.
+   *
+   * <p>Value-type: {@link String}
+   */
+  SSL_KEYSTORE_TYPE("advanced.ssl-engine-factory.keystore-type"),
+  /**
    * The location of the keystore file.
    *
    * <p>Value-type: {@link String}
