@@ -102,9 +102,12 @@ datastax-java-driver {
     # The locations and passwords used to access truststore and keystore contents.
     # These properties are optional. If either truststore-path or keystore-path are specified,
     # the driver builds an SSLContext from these files.  If neither option is specified, the
-    # default SSLContext is used, which is based on system property configuration.
+    # default SSLContext is used, which is based on system property configuration.  Additionally,
+    # the keystore-type parameter is passed to configure which type of keystore to create. This
+    # is usually fine at the default of JKS.
     // truststore-path = /path/to/client.truststore
     // truststore-password = password123
+    // keystore-type = JKS
     // keystore-path = /path/to/client.keystore
     // keystore-password = password123
   }
